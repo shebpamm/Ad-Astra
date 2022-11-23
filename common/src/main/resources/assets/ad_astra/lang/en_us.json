@@ -730,5 +730,7 @@
   "tooltip.ad_astra.consumable": "§2Consumable",
   "tooltip.ad_astra.hold_shift": "Hold shift for more info",
   "tooltip.ad_astra.space_suit": "§bOxygen: §%s/%d 🪣",
-  "tooltip.ad_astra.vehicle_fuel": "§bFuel: §%s/%d 🪣"
+  "tooltip.ad_astra.vehicle_fuel": "§bFuel: §%s/%d 🪣",
+  "tooltip.ad_astra.tank_item.message": "\uD83E\uDEA3 %s",
+  "tooltip.ad_astra.tank_item.tooltip": "\uD83E\uDEA3 %s/%s"
 }

@@ -233,8 +233,8 @@ public class ModItems {
     public static final Supplier<Item> STEEL_ENGINE = registerItem("steel_engine");
     public static final Supplier<Item> CALORITE_ENGINE = registerItem("calorite_engine");
 
-    public static final Supplier<Item> STEEL_TANK = registerItem("steel_tank");
-    public static final Supplier<Item> DESH_TANK = registerItem("desh_tank");
+    public static final Supplier<Item> STEEL_TANK = register("steel_tank", () -> new FluidTankItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1), 2));
+    public static final Supplier<Item> DESH_TANK = register("desh_tank", () -> new FluidTankItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1), 6));
 
     public static final Supplier<Item> ROCKET_FIN = registerItem("rocket_fin");
     public static final Supplier<Item> ETRIONIC_CORE = registerItem("etrionic_core");

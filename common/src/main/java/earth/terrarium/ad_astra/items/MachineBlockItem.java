@@ -6,6 +6,7 @@ import earth.terrarium.ad_astra.blocks.machines.entity.OxygenDistributorBlockEnt
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.PlatformEnergyManager;
 import earth.terrarium.botarium.api.fluid.FluidHooks;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.ContainerHelper;
@@ -29,9 +30,14 @@ public class MachineBlockItem extends BlockItem {
             if (level.getBlockEntity(pos) instanceof AbstractMachineBlockEntity machineBlock) {
                 CompoundTag nbt = stack.getOrCreateTag();
                 ContainerHelper.loadAllItems(nbt, machineBlock.getItems());
-                if (nbt.contains("Energy")) {
-                    Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
-                    energyBlock.ifPresent(platformEnergyManager -> platformEnergyManager.insert(nbt.getLong("Energy"), false));
+                ItemStackHolder holder = new ItemStackHolder(stack);
+
+                long moved = EnergyHooks.safeMoveItemToBlockEnergy(holder, machineBlock, null, Integer.MAX_VALUE);
+                if(moved == 0) {
+                    if (nbt.contains("Energy")) {
+                        Optional<PlatformEnergyManager> energyBlock = EnergyHooks.safeGetBlockEnergyManager(machineBlock, null);
+                        energyBlock.ifPresent(platformEnergyManager -> platformEnergyManager.insert(nbt.getLong("Energy"), false));
+                    }
                 }
 
                 if (machineBlock instanceof FluidMachineBlockEntity fluidMachine) {

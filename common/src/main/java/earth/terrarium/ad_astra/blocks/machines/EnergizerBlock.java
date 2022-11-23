@@ -2,6 +2,8 @@ package earth.terrarium.ad_astra.blocks.machines;
 
 import earth.terrarium.ad_astra.blocks.machines.entity.EnergizerBlockEntity;
 import earth.terrarium.ad_astra.registry.ModItems;
+import earth.terrarium.botarium.api.energy.EnergyHooks;
+import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -80,7 +82,9 @@ public class EnergizerBlock extends AbstractMachineBlock {
     public List<ItemStack> getDrops(BlockState state, net.minecraft.world.level.storage.loot.LootContext.Builder builder) {
         BlockEntity blockEntity = builder.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         ItemStack stack = ModItems.ENERGIZER.get().getDefaultInstance();
-        stack.getOrCreateTag().putLong("Energy", ((EnergizerBlockEntity) blockEntity).getEnergyStorage().getStoredEnergy());
+        ItemStackHolder holder = new ItemStackHolder(stack);
+        EnergyHooks.safeGetItemEnergyManager(stack).ifPresent(platformItemEnergyManager -> platformItemEnergyManager.insert(holder, ((EnergizerBlockEntity) blockEntity).getEnergyStorage().getStoredEnergy(), false));
+        if(holder.isDirty()) stack = holder.getStack();
         return List.of(stack);
     }
 }

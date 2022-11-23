@@ -389,7 +389,7 @@ class ModRecipeProvider extends FabricRecipeProvider {
                 .define('B', ModItems.OSTRUM_BLOCK.get()).pattern("#I#").pattern("#D#").pattern("B#B").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
 
         // Cryo Freezer
-        ShapedRecipeBuilder.shaped(ModItems.CRYO_FREEZER.get()).define('#', ModTags.OSTRUM_PLATES).define('O', ModItems.OSTRUM_INGOT.get()).define('T', ModItems.OSTRUM_TANK.get())
+        ShapedRecipeBuilder.shaped(ModItems.CRYO_FREEZER.get()).define('#', ModTags.OSTRUM_PLATES).define('O', ModItems.OSTRUM_INGOT.get()).define('T', ModItems.DESH_TANK.get())
                 .define('B', ModItems.OSTRUM_BLOCK.get()).pattern("#O#").pattern("OTO").pattern("BOB").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
 
         // Oxygen Sensor
@@ -431,7 +431,7 @@ class ModRecipeProvider extends FabricRecipeProvider {
 
         // Rover
         ShapedRecipeBuilder.shaped(ModItems.TIER_1_ROVER.get()).define('#', ModItems.WHEEL.get()).define('S', ModTags.STEEL_BLOCKS).define('|', ModTags.IRON_RODS)
-                .define('D', ModTags.DESH_BLOCKS).define('P', ModTags.DESH_PLATES).define('E', ModItems.DESH_ENGINE.get()).pattern("D |").pattern("SDE").pattern("#P#").group(null)
+                .define('D', ModTags.DESH_BLOCKS).define('P', ModTags.DESH_PLATES).define('E', ModItems.STEEL_ENGINE.get()).pattern("D |").pattern("SDE").pattern("#P#").group(null)
                 .unlockedBy("has_tag", has(ModTags.DESH_PLATES)).save(exporter);
 
         // Oxygen Tank
@@ -481,7 +481,7 @@ class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("#N#").pattern("#G#").group(null).unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(exporter);
 
         ShapedRecipeBuilder.shaped(ModItems.JET_SUIT.get()).define('#', ModTags.CALORITE_PLATES).define('B', ModTags.CALORITE_BLOCKS).define('N', ModItems.NETHERITE_SPACE_SUIT.get())
-                .define('E', ModItems.CALORITE_ENGINE.get()).define('T', ModItems.CALORITE_TANK.get()).pattern("# #").pattern("TNT").pattern("BEB").group(null).unlockedBy("has_tag", has(ModTags.CALORITE_PLATES))
+                .define('E', ModItems.CALORITE_ENGINE.get()).define('T', ModItems.DESH_TANK.get()).pattern("# #").pattern("TNT").pattern("BEB").group(null).unlockedBy("has_tag", has(ModTags.CALORITE_PLATES))
                 .save(exporter);
 
         ShapedRecipeBuilder.shaped(ModItems.JET_SUIT_PANTS.get()).define('#', ModTags.CALORITE_PLATES).define('N', ModItems.NETHERITE_SPACE_PANTS.get()).pattern("#N#").pattern("# #").pattern("# #").group(null)
@@ -508,10 +508,6 @@ class ModRecipeProvider extends FabricRecipeProvider {
         ShapedRecipeBuilder.shaped(ModItems.WHEEL.get()).define('#', ModTags.STEEL_PLATES).define('B', Items.BLACK_DYE).pattern(" B ").pattern("B#B").pattern(" B ").group(null)
                 .unlockedBy("has_tag", has(ModTags.STEEL_PLATES)).save(exporter);
 
-        // Engine Frame
-        ShapedRecipeBuilder.shaped(ModItems.ENGINE_FRAME.get()).define('#', ModTags.STEEL_PLATES).define('|', ModTags.IRON_RODS).pattern("|||").pattern("|#|").pattern("|||").group(null)
-                .unlockedBy("has_tag", has(ModTags.STEEL_PLATES)).save(exporter);
-
         // Engine Fan
         ShapedRecipeBuilder.shaped(ModItems.ENGINE_FAN.get()).define('#', ModTags.STEEL_PLATES).define('|', ModTags.IRON_RODS).pattern(" | ").pattern("|#|").pattern(" | ").group(null)
                 .unlockedBy("has_tag", has(ModTags.STEEL_PLATES)).save(exporter);
@@ -521,16 +517,10 @@ class ModRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy("has_tag", has(ModTags.STEEL_PLATES)).save(exporter);
 
         // Engines
-        ShapedRecipeBuilder.shaped(ModItems.STEEL_ENGINE.get()).define('#', ModTags.STEEL_PLATES).define('E', ModItems.ENGINE_FRAME.get()).define('F', ModItems.ENGINE_FAN.get()).pattern("###").pattern(" E ")
+        ShapedRecipeBuilder.shaped(ModItems.STEEL_ENGINE.get()).define('#', ModTags.STEEL_PLATES).define('E', ModItems.STEEL_BLOCK.get()).define('F', ModItems.ENGINE_FAN.get()).pattern("###").pattern(" E ")
                 .pattern(" F ").group("engines").unlockedBy("has_tag", has(ModTags.STEEL_PLATES)).save(exporter);
 
-        ShapedRecipeBuilder.shaped(ModItems.DESH_ENGINE.get()).define('#', ModTags.DESH_PLATES).define('E', ModItems.ENGINE_FRAME.get()).define('F', ModItems.ENGINE_FAN.get()).pattern("###").pattern(" E ")
-                .pattern(" F ").group("engines").unlockedBy("has_tag", has(ModTags.DESH_PLATES)).save(exporter);
-
-        ShapedRecipeBuilder.shaped(ModItems.OSTRUM_ENGINE.get()).define('#', ModTags.OSTRUM_PLATES).define('E', ModItems.ENGINE_FRAME.get()).define('F', ModItems.ENGINE_FAN.get()).pattern("###").pattern(" E ")
-                .pattern(" F ").group("engines").unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
-
-        ShapedRecipeBuilder.shaped(ModItems.CALORITE_ENGINE.get()).define('#', ModTags.CALORITE_PLATES).define('E', ModItems.ENGINE_FRAME.get()).define('F', ModItems.ENGINE_FAN.get()).pattern("###")
+        ShapedRecipeBuilder.shaped(ModItems.CALORITE_ENGINE.get()).define('#', ModTags.CALORITE_PLATES).define('E', ModItems.STEEL_BLOCK.get()).define('F', ModItems.ENGINE_FAN.get()).pattern("###")
                 .pattern(" E ").pattern(" F ").group("engines").unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(exporter);
 
         // Tanks
@@ -539,12 +529,6 @@ class ModRecipeProvider extends FabricRecipeProvider {
 
         ShapedRecipeBuilder.shaped(ModItems.DESH_TANK.get()).define('#', ModTags.DESH_PLATES).define('|', ModTags.IRON_RODS).define('U', Items.BUCKET).pattern("## ").pattern("#U|")
                 .pattern("## ").group("tanks").unlockedBy("has_tag", has(ModTags.DESH_PLATES)).save(exporter);
-
-        ShapedRecipeBuilder.shaped(ModItems.OSTRUM_TANK.get()).define('#', ModTags.OSTRUM_PLATES).define('|', ModTags.IRON_RODS).define('U', Items.BUCKET).pattern("## ").pattern("#U|")
-                .pattern("## ").group("tanks").unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
-
-        ShapedRecipeBuilder.shaped(ModItems.CALORITE_TANK.get()).define('#', ModTags.CALORITE_PLATES).define('|', ModTags.IRON_RODS).define('U', Items.BUCKET).pattern("## ").pattern("#U|")
-                .pattern("## ").group("tanks").unlockedBy("has_tag", has(ModTags.CALORITE_PLATES)).save(exporter);
 
         ShapedRecipeBuilder.shaped(ModItems.WRENCH.get()).define('#', ModTags.DESH_PLATES).pattern("# #").pattern(" # ").pattern(" # ").group(null).unlockedBy("has_tag", has(ModTags.DESH_PLATES)).save(exporter);
 

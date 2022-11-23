@@ -350,6 +350,7 @@ public class ModBlocks {
     public static final Supplier<Block> DEEPSLATE_DESH_ORE = register("deepslate_desh_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
     public static final Supplier<Block> DEEPSLATE_OSTRUM_ORE = register("deepslate_ostrum_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
     public static final Supplier<Block> DEEPSLATE_CALORITE_ORE = register("deepslate_calorite_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
+    public static final Supplier<Block> SKYSTONE_ETRIUM_ORE = register("sky_stone_etrium_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)), true);
 
     public static final Supplier<Block> OIL_BLOCK = ModBlocks.register("oil", () -> new BotariumLiquidBlock(ModFluidProperties.OIL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));
     public static final Supplier<Block> FUEL_BLOCK = ModBlocks.register("fuel", () -> new BotariumLiquidBlock(ModFluidProperties.FUEL_FLUID, BlockBehaviour.Properties.copy(Blocks.WATER)));

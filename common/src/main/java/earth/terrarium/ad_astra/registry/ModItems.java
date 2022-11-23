@@ -228,18 +228,17 @@ public class ModItems {
     public static final Supplier<Item> IRON_ROD = registerItem("iron_rod");
     public static final Supplier<Item> OXYGEN_GEAR = registerItem("oxygen_gear");
     public static final Supplier<Item> WHEEL = registerItem("wheel");
-    public static final Supplier<Item> ENGINE_FRAME = registerItem("engine_frame");
     public static final Supplier<Item> ENGINE_FAN = registerItem("engine_fan");
     public static final Supplier<Item> ROCKET_NOSE_CONE = registerItem("rocket_nose_cone");
+
     public static final Supplier<Item> STEEL_ENGINE = registerItem("steel_engine");
-    public static final Supplier<Item> DESH_ENGINE = registerItem("desh_engine");
-    public static final Supplier<Item> OSTRUM_ENGINE = registerItem("ostrum_engine");
     public static final Supplier<Item> CALORITE_ENGINE = registerItem("calorite_engine");
+
     public static final Supplier<Item> STEEL_TANK = registerItem("steel_tank");
     public static final Supplier<Item> DESH_TANK = registerItem("desh_tank");
-    public static final Supplier<Item> OSTRUM_TANK = registerItem("ostrum_tank");
-    public static final Supplier<Item> CALORITE_TANK = registerItem("calorite_tank");
+
     public static final Supplier<Item> ROCKET_FIN = registerItem("rocket_fin");
+    public static final Supplier<Item> ETRIONIC_CORE = registerItem("etrionic_core");
 
     // Torch items
     public static final Supplier<Item> EXTINGUISHED_TORCH = register("extinguished_torch", () -> new StandingAndWallBlockItem(ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), new Item.Properties().tab(ITEM_GROUP)));
@@ -249,6 +248,7 @@ public class ModItems {
     public static final Supplier<Item> DESH_INGOT = registerItem("desh_ingot");
     public static final Supplier<Item> OSTRUM_INGOT = registerItem("ostrum_ingot");
     public static final Supplier<Item> CALORITE_INGOT = registerItem("calorite_ingot");
+    public static final Supplier<Item> ETRIUM_INGOT = registerItem("etrium_ingot");
 
     public static final Supplier<Item> ICE_SHARD = registerItem("ice_shard");
 
@@ -262,6 +262,7 @@ public class ModItems {
     public static final Supplier<Item> DESH_NUGGET = registerItem("desh_nugget");
     public static final Supplier<Item> OSTRUM_NUGGET = registerItem("ostrum_nugget");
     public static final Supplier<Item> CALORITE_NUGGET = registerItem("calorite_nugget");
+    public static final Supplier<Item> ETRIUM_NUGGET = registerItem("etrium_nugget");
 
     public static final Supplier<Item> RAW_DESH = registerItem("raw_desh");
     public static final Supplier<Item> RAW_OSTRUM = registerItem("raw_ostrum");
@@ -397,6 +398,7 @@ public class ModItems {
     public static final Supplier<Item> DEEPSLATE_DESH_ORE = registerBlockItem("deepslate_desh_ore", ModBlocks.DEEPSLATE_DESH_ORE);
     public static final Supplier<Item> MOON_IRON_ORE = registerBlockItem("moon_iron_ore", ModBlocks.MOON_IRON_ORE);
     public static final Supplier<Item> MOON_ICE_SHARD_ORE = registerBlockItem("moon_ice_shard_ore", ModBlocks.MOON_ICE_SHARD_ORE);
+    public static final Supplier<Item> SKY_STONE_ETRIUM_ORE = registerBlockItem("sky_stone_etrium_ore", ModBlocks.SKYSTONE_ETRIUM_ORE);
 
     public static final Supplier<Item> STROPHAR_CAP = registerBlockItem("strophar_cap", ModBlocks.STROPHAR_CAP);
     public static final Supplier<Item> STROPHAR_DOOR = registerBlockItem("strophar_door", ModBlocks.STROPHAR_DOOR);

@@ -223,7 +223,6 @@ public class ModItems {
     });
 
     public static final Supplier<Item> WRENCH = register("wrench", () -> new WrenchItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1)));
-    public static final Supplier<Item> HAMMER = register("hammer", () -> new HammerItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1).durability(AdAstra.CONFIG.general.hammerDurability)));
 
     public static final Supplier<Item> IRON_ROD = registerItem("iron_rod");
     public static final Supplier<Item> OXYGEN_GEAR = registerItem("oxygen_gear");

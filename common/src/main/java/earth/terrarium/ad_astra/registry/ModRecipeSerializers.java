@@ -10,7 +10,6 @@ import net.minecraft.world.item.crafting.ShapelessRecipe;
 import java.util.function.Supplier;
 
 public class ModRecipeSerializers {
-    public static final Supplier<RecipeSerializer<ShapelessRecipe>> HAMMER_SERIALIZER = register("hammering", HammerShapelessRecipe.Serializer::new);
     public static final Supplier<RecipeSerializer<CompressingRecipe>> COMPRESSING_SERIALIZER = register("compressing", () -> new CodecRecipeSerializer<>(ModRecipeTypes.COMPRESSING_RECIPE.get(), CompressingRecipe::codec));
     public static final Supplier<RecipeSerializer<SpaceStationRecipe>> SPACE_STATION_SERIALIZER = register("space_station", () -> new CodecRecipeSerializer<>(ModRecipeTypes.SPACE_STATION_RECIPE.get(), SpaceStationRecipe::codec));
     public static final Supplier<RecipeSerializer<NasaWorkbenchRecipe>> NASA_WORKBENCH_SERIALIZER = register("nasa_workbench", () -> new CodecRecipeSerializer<>(ModRecipeTypes.NASA_WORKBENCH_RECIPE.get(), NasaWorkbenchRecipe::codec));

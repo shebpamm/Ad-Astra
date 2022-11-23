@@ -552,7 +552,6 @@
 	"item.ad_astra.calorite_ingot" : "耐热金属锭",
 	"item.ad_astra.calorite_nugget": "耐热金属粒",
 	"item.ad_astra.calorite_plate" : "耐热金属板",
-	"item.ad_astra.calorite_tank"  : "耐热金属燃料储罐",
 
 	"item.ad_astra.cheese": "奶酪",
 
@@ -565,7 +564,6 @@
 	"item.ad_astra.cryo_freezer.tooltip": "将冰晶转化为深低温燃油。",
 	"item.ad_astra.cryo_fuel_bucket"    : "深低温燃油桶",
 
-	"item.ad_astra.desh_engine": "戴斯火箭引擎",
 	"item.ad_astra.desh_ingot" : "戴斯锭",
 	"item.ad_astra.desh_nugget": "戴斯粒",
 	"item.ad_astra.desh_plate" : "戴斯板",
@@ -620,11 +618,9 @@
 
 	"item.ad_astra.oil_bucket": "原油桶",
 
-	"item.ad_astra.ostrum_engine": "紫金火箭引擎",
 	"item.ad_astra.ostrum_ingot" : "紫金锭",
 	"item.ad_astra.ostrum_nugget": "紫金粒",
 	"item.ad_astra.ostrum_plate" : "紫金板",
-	"item.ad_astra.ostrum_tank"  : "紫金燃料储罐",
 
 	"item.ad_astra.oxygen_bucket"                : "氧气桶",
 	"item.ad_astra.oxygen_distributor.tooltip[0]": "将氧气扩散进",

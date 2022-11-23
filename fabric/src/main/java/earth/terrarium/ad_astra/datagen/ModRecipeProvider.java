@@ -353,7 +353,7 @@ class ModRecipeProvider extends FabricRecipeProvider {
         // Machines
         // NASA Workbench
         ShapedRecipeBuilder.shaped(ModItems.NASA_WORKBENCH.get()).define('#', ModTags.STEEL_PLATES).define('C', Blocks.CRAFTING_TABLE).define('B', ModTags.STEEL_BLOCKS)
-                .define('R', Blocks.REDSTONE_BLOCK).define('T', Blocks.REDSTONE_TORCH).define('L', Blocks.LEVER).pattern("TLT").pattern("#C#").pattern("RBR").group(null)
+                .define('R', ModItems.ETRIUM_INGOT.get()).define('T', ModItems.IRON_ROD.get()).pattern("TTT").pattern("#C#").pattern("RBR").group(null)
                 .unlockedBy("has_tag", has(ModTags.STEEL_PLATES)).save(exporter);
 
         // Solar Panel
@@ -493,9 +493,6 @@ class ModRecipeProvider extends FabricRecipeProvider {
         // Soul Torch
         ShapedRecipeBuilder.shaped(Items.SOUL_TORCH).define('#', ModItems.EXTINGUISHED_TORCH.get()).define('S', Items.SOUL_SOIL).pattern("S").pattern("#")
                 .unlockedBy(getHasName(ModItems.EXTINGUISHED_TORCH.get()), has(ModItems.EXTINGUISHED_TORCH.get())).save(exporter);
-        // Hammer
-        ShapedRecipeBuilder.shaped(ModItems.HAMMER.get()).define('#', Items.IRON_INGOT).define('|', Items.STICK).pattern(" # ").pattern(" |#").pattern("|  ").group(null)
-                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT)).save(exporter);
 
         // Iron Rod
         ShapedRecipeBuilder.shaped(ModItems.IRON_ROD.get(), 4).define('#', ModTags.IRON_PLATES).pattern("#").pattern("#").group("iron_rods").unlockedBy("has_tag", has(ModTags.IRON_PLATES)).save(exporter);

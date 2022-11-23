@@ -10,18 +10,15 @@
     "C": {
       "item": "minecraft:crafting_table"
     },
-    "L": {
-      "item": "minecraft:lever"
-    },
     "R": {
-      "item": "minecraft:redstone_block"
+      "item": "ad_astra:etrium_ingot"
     },
     "T": {
-      "item": "minecraft:redstone_torch"
+      "tag": "ad_astra_platform:iron_rods"
     }
   },
   "pattern": [
-    "TLT",
+    "TTT",
     "#C#",
     "RBR"
   ],

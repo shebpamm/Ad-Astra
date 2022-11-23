@@ -2,10 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "tag": "ad_astra_platform:ostrum_plates"
+      "item": "ad_astra:etrium_nugget"
+    },
+    "R": {
+      "tag": "ad_astra_platform:iron_rods"
     },
     "B": {
-      "item": "ad_astra:ostrum_block"
+      "item": "ad_astra:etrium_ingot"
     },
     "D": {
       "item": "minecraft:diamond_block"
@@ -15,7 +18,7 @@
     }
   },
   "pattern": [
-    "#I#",
+    "RIR",
     "#D#",
     "B#B"
   ],

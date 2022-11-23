@@ -43,17 +43,12 @@
     },
     {
       "ingredient": {
-        "item": "ad_astra:ostrum_tank"
+        "item": "ad_astra:desh_tank"
       }
     },
     {
       "ingredient": {
-        "item": "ad_astra:ostrum_tank"
-      }
-    },
-    {
-      "ingredient": {
-        "item": "ad_astra:rocket_fin"
+        "item": "ad_astra:desh_tank"
       }
     },
     {
@@ -63,7 +58,12 @@
     },
     {
       "ingredient": {
-        "item": "ad_astra:ostrum_engine"
+        "item": "ad_astra:rocket_fin"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "ad_astra:steel_engine"
       }
     },
     {

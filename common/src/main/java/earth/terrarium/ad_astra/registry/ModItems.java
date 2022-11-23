@@ -243,11 +243,11 @@ public class ModItems {
     public static final Supplier<Item> EXTINGUISHED_TORCH = register("extinguished_torch", () -> new StandingAndWallBlockItem(ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), new Item.Properties().tab(ITEM_GROUP)));
     public static final Supplier<Item> EXTINGUISHED_LANTERN = registerBlockItem("extinguished_lantern", ModBlocks.EXTINGUISHED_LANTERN);
 
+    public static final Supplier<Item> ETRIUM_INGOT = registerItem("etrium_ingot");
     public static final Supplier<Item> STEEL_INGOT = registerItem("steel_ingot");
     public static final Supplier<Item> DESH_INGOT = registerItem("desh_ingot");
     public static final Supplier<Item> OSTRUM_INGOT = registerItem("ostrum_ingot");
     public static final Supplier<Item> CALORITE_INGOT = registerItem("calorite_ingot");
-    public static final Supplier<Item> ETRIUM_INGOT = registerItem("etrium_ingot");
 
     public static final Supplier<Item> ICE_SHARD = registerItem("ice_shard");
 
@@ -257,11 +257,11 @@ public class ModItems {
     public static final Supplier<Item> OSTRUM_PLATE = registerItem("ostrum_plate");
     public static final Supplier<Item> CALORITE_PLATE = registerItem("calorite_plate");
 
+    public static final Supplier<Item> ETRIUM_NUGGET = registerItem("etrium_nugget");
     public static final Supplier<Item> STEEL_NUGGET = registerItem("steel_nugget");
     public static final Supplier<Item> DESH_NUGGET = registerItem("desh_nugget");
     public static final Supplier<Item> OSTRUM_NUGGET = registerItem("ostrum_nugget");
     public static final Supplier<Item> CALORITE_NUGGET = registerItem("calorite_nugget");
-    public static final Supplier<Item> ETRIUM_NUGGET = registerItem("etrium_nugget");
 
     public static final Supplier<Item> RAW_DESH = registerItem("raw_desh");
     public static final Supplier<Item> RAW_OSTRUM = registerItem("raw_ostrum");
@@ -297,8 +297,7 @@ public class ModItems {
     public static final Supplier<Item> GLACIO_GLOBE = registerGlobe("glacio_globe", ModBlocks.GLACIO_GLOBE);
 
     // Cables
-    public static final Supplier<Item> STEEL_CABLE = register("steel_cable", () -> new BlockItem(ModBlocks.STEEL_CABLE.get(), new Item.Properties().tab(ITEM_GROUP)));
-    public static final Supplier<Item> DESH_CABLE = register("desh_cable", () -> new BlockItem(ModBlocks.DESH_CABLE.get(), new Item.Properties().tab(ITEM_GROUP)));
+    public static final Supplier<Item> ETRIUM_CABLE = register("etrium_cable", () -> new BlockItem(ModBlocks.ETRIUM_CABLE.get(), new Item.Properties().tab(ITEM_GROUP)));
 
     // Fluid pipes
     public static final Supplier<Item> DESH_FLUID_PIPE = register("desh_fluid_pipe", () -> new BlockItem(ModBlocks.DESH_FLUID_PIPE.get(), new Item.Properties().tab(ITEM_GROUP)));

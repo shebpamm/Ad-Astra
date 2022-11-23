@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "ad_astra:block/cable/desh_cable_core"
+        "model": "ad_astra:block/cable/etrium_cable_core"
       }
     },
     {
@@ -10,7 +10,7 @@
         "north": "true"
       },
       "apply": {
-        "model": "ad_astra:block/cable/desh_cable_side"
+        "model": "ad_astra:block/cable/etrium_cable_side"
       }
     },
     {
@@ -18,7 +18,7 @@
         "east": "true"
       },
       "apply": {
-        "model": "ad_astra:block/cable/desh_cable_side",
+        "model": "ad_astra:block/cable/etrium_cable_side",
         "y": 90
       }
     },
@@ -27,7 +27,7 @@
         "south": "true"
       },
       "apply": {
-        "model": "ad_astra:block/cable/desh_cable_side",
+        "model": "ad_astra:block/cable/etrium_cable_side",
         "y": 180
       }
     },
@@ -36,7 +36,7 @@
         "west": "true"
       },
       "apply": {
-        "model": "ad_astra:block/cable/desh_cable_side",
+        "model": "ad_astra:block/cable/etrium_cable_side",
         "y": 270
       }
     },
@@ -45,8 +45,7 @@
         "up": "true"
       },
       "apply": {
-        "model": "ad_astra:block/cable/desh_cable_side",
-        "x": 270
+        "model": "ad_astra:block/cable/etrium_cable_top"
       }
     },
     {
@@ -54,8 +53,7 @@
         "down": "true"
       },
       "apply": {
-        "model": "ad_astra:block/cable/desh_cable_side",
-        "x": 90
+        "model": "ad_astra:block/cable/etrium_cable_bottom"
       }
     }
   ]

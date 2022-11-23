@@ -66,8 +66,7 @@ public class ModBlocks {
     public static final Supplier<Block> WALL_EXTINGUISHED_TORCH = register("wall_extinguished_torch", () -> new WallExtinguishedTorchBlock(BlockBehaviour.Properties.of(Material.DECORATION).noCollission().instabreak().sound(SoundType.WOOD)), true);
     public static final Supplier<Block> EXTINGUISHED_LANTERN = register("extinguished_lantern", () -> new ExtinguishedLanternBlock(BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.LANTERN).strength(3.5f).noOcclusion()));
 
-    public static final Supplier<Block> STEEL_CABLE = register("steel_cable", () -> new CableBlock(256, 2, 0.344, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
-    public static final Supplier<Block> DESH_CABLE = register("desh_cable", () -> new CableBlock(1024, 1, 0.312, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
+    public static final Supplier<Block> ETRIUM_CABLE = register("etrium_cable", () -> new CableBlock(512, 2, 0.344, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
 
     public static final Supplier<Block> DESH_FLUID_PIPE = register("desh_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1) / 10, 1, 0.185, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));
     public static final Supplier<Block> OSTRUM_FLUID_PIPE = register("ostrum_fluid_pipe", () -> new FluidPipeBlock(FluidHooks.buckets(1) / 5, 1, 0.185, BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.NETHERITE_BLOCK).strength(1.0f, 1.0f)));

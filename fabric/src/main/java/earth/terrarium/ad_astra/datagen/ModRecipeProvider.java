@@ -397,11 +397,8 @@ class ModRecipeProvider extends FabricRecipeProvider {
                 .define('L', Items.REDSTONE_LAMP).define('F', ModItems.ENGINE_FAN.get()).pattern("#F#").pattern("OVO").pattern("#L#").group(null).unlockedBy("has_tag", has(ModTags.OSTRUM_PLATES)).save(exporter);
 
         // Cables
-        ShapedRecipeBuilder.shaped(ModItems.STEEL_CABLE.get(), 4).define('#', ModTags.STEEL_PLATES).define('C', Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
+        ShapedRecipeBuilder.shaped(ModItems.ETRIUM_CABLE.get(), 4).define('#', ModTags.STEEL_PLATES).define('C', Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
                 .unlockedBy("has_tag", has(ModTags.STEEL_PLATES)).save(exporter);
-
-        ShapedRecipeBuilder.shaped(ModItems.DESH_CABLE.get(), 4).define('#', ModTags.DESH_PLATES).define('C', Items.COPPER_INGOT).pattern("###").pattern("CCC").pattern("###").group(null)
-                .unlockedBy("has_tag", has(ModTags.DESH_PLATES)).save(exporter);
 
         ShapedRecipeBuilder.shaped(ModItems.DESH_FLUID_PIPE.get(), 4).define('#', ModTags.DESH_PLATES).define('C', Items.GLASS).pattern("###").pattern("CCC").pattern("###").group(null)
                 .unlockedBy("has_tag", has(ModTags.DESH_PLATES)).save(exporter);

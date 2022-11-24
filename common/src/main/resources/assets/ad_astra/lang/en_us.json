@@ -447,6 +447,7 @@
   "item.ad_astra.etrium_ingot": "Etrium Ingot",
   "item.ad_astra.etrium_nugget": "Etrium Nugget",
   "item.ad_astra.etrionic_core": "Etrionic Core",
+  "item.ad_astra.etrionic_capacitor": "Etrionic Capacitor",
   "item.ad_astra.calorite_engine": "Calorite Engine",
   "item.ad_astra.calorite_ingot": "Calorite Ingot",
   "item.ad_astra.calorite_nugget": "Calorite Nugget",
@@ -732,5 +733,10 @@
   "tooltip.ad_astra.space_suit": "§bOxygen: §%s/%d 🪣",
   "tooltip.ad_astra.vehicle_fuel": "§bFuel: §%s/%d 🪣",
   "tooltip.ad_astra.tank_item.message": "\uD83E\uDEA3 %s",
-  "tooltip.ad_astra.tank_item.tooltip": "\uD83E\uDEA3 %s/%s"
+  "tooltip.ad_astra.tank_item.tooltip": "\uD83E\uDEA3 %s/%s",
+  "misc.ad_astra.distribution_mode.round_robin": "Round Robin",
+  "misc.ad_astra.distribution_mode.sequential": "Sequential",
+  "item.ad_astra.etrionic_capacitor.mode_change": "⚡ Mode: %s",
+  "item.ad_astra.etrionic_capacitor.on": "Capacitor Enabled",
+  "item.ad_astra.etrionic_capacitor.off": "Capacitor Disabled"
 }

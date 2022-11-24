@@ -239,6 +239,8 @@ public class ModItems {
     public static final Supplier<Item> ROCKET_FIN = registerItem("rocket_fin");
     public static final Supplier<Item> ETRIONIC_CORE = registerItem("etrionic_core");
 
+    public static final Supplier<Item> ETRIONIC_CAPACITOR = register("etrionic_capacitor", () -> new EtrionicCapacitorItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1)));
+
     // Torch items
     public static final Supplier<Item> EXTINGUISHED_TORCH = register("extinguished_torch", () -> new StandingAndWallBlockItem(ModBlocks.EXTINGUISHED_TORCH.get(), ModBlocks.WALL_EXTINGUISHED_TORCH.get(), new Item.Properties().tab(ITEM_GROUP)));
     public static final Supplier<Item> EXTINGUISHED_LANTERN = registerBlockItem("extinguished_lantern", ModBlocks.EXTINGUISHED_LANTERN);

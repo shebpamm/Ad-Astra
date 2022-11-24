@@ -44,6 +44,8 @@ public class AdAstraConfig implements ConfigData {
     public final EnergizerConfig energizer = new EnergizerConfig();
     @ConfigEntry.Gui.CollapsibleObject
     public final CryoFreezerConfig cryoFreezer = new CryoFreezerConfig();
+    @ConfigEntry.Gui.CollapsibleObject
+    public final EtrionicCapacitorConfig capacitorConfig = new EtrionicCapacitorConfig();
 
     public static class GeneralConfig {
         public final boolean spawnCorruptedLunarians = true;
@@ -60,7 +62,6 @@ public class AdAstraConfig implements ConfigData {
         @ConfigEntry.Gui.Tooltip(count = 2)
         public final boolean doSpaceMuffler = true;
         public final long oxygenTankSize = FluidHooks.buckets(1) / 2;
-        public final int hammerDurability = 64;
         public final boolean giveAstroduxAtSpawn = false;
         public final int oxygenBarXOffset = 0;
         public final int oxygenBarYOffset = 0;
@@ -195,5 +196,10 @@ public class AdAstraConfig implements ConfigData {
         public final long maxEnergy = 30000L;
         public final long energyPerTick = 24L;
         public final long tankSize = FluidHooks.buckets(3);
+    }
+
+    public static class EtrionicCapacitorConfig {
+        public final long maxEnergy = 250000L;
+        public final long transferRate = 500L;
     }
 }

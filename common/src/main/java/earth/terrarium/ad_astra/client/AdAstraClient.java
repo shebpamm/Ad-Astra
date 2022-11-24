@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import dev.architectury.injectables.annotations.ExpectPlatform;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModScreens;
@@ -18,6 +19,7 @@ import earth.terrarium.ad_astra.client.renderer.entity.vehicles.rover.RoverItemR
 import earth.terrarium.ad_astra.client.resourcepack.*;
 import earth.terrarium.ad_astra.client.screens.PlayerOverlayScreen;
 import earth.terrarium.ad_astra.data.Planet;
+import earth.terrarium.ad_astra.items.EtrionicCapacitorItem;
 import earth.terrarium.ad_astra.registry.ModBlocks;
 import earth.terrarium.ad_astra.registry.ModFluids;
 import earth.terrarium.ad_astra.registry.ModItems;
@@ -30,6 +32,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelManager;
@@ -41,6 +45,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.ArrayList;
@@ -64,6 +69,9 @@ public class AdAstraClient {
 
         // Sign textures
         Sheets.SIGN_MATERIALS.put(ModBlocks.GLACIAN, new Material(Sheets.SIGN_SHEET, new ModResourceLocation("entity/signs/glacian")));
+
+        // Item properties
+        registerItemProperty(ModItems.ETRIONIC_CAPACITOR.get(), new ModResourceLocation("toggled"), EtrionicCapacitorItem::itemProperty);
     }
 
     public static void onRegisterHud(Consumer<RenderHud> register) {
@@ -156,5 +164,10 @@ public class AdAstraClient {
     @FunctionalInterface
     public interface RenderHud {
         void renderHud(PoseStack poseStack, float partialTick);
+    }
+
+    @ExpectPlatform
+    public static void registerItemProperty(Item item, ResourceLocation name, ClampedItemPropertyFunction property) {
+        throw new NotImplementedException();
     }
 }

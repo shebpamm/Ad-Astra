@@ -30,6 +30,7 @@ public class AdAstra {
     public static Set<ResourceKey<Level>> orbitWorlds = new HashSet<>();
     public static Set<ResourceKey<Level>> planetWorlds = new HashSet<>();
     public static Set<ResourceKey<Level>> levelsWithOxygen = new HashSet<>();
+    public static int ETRIUM_COLOR = 0x63dcc2;
 
     public static void init() {
         // TODO: use a different config shedanial hates cloth config lol

@@ -65,7 +65,7 @@ public class EtrionicCapacitorItem extends Item implements EnergyItem {
 
         long transferRate = AdAstra.CONFIG.capacitorConfig.transferRate;
         ItemStackHolder from = new ItemStackHolder(stack);
-        if(getEnergyStorage(stack).getStoredEnergy() > transferRate && isToggled(stack) && entity instanceof Player player) {
+        if(getEnergyStorage(stack).getStoredEnergy() > 0 && isToggled(stack) && entity instanceof Player player) {
             DistributionMode mode = DistributionMode.getMode(stack);
             if(mode == DistributionMode.ROUND_ROBIN) {
                 Map<SlottedItem, Long> containers = new HashMap<>();
@@ -175,6 +175,32 @@ public class EtrionicCapacitorItem extends Item implements EnergyItem {
         public Component getComponent() {
             return Component.translatable("misc.ad_astra.distribution_mode." + toString().toLowerCase(Locale.ROOT));
         }
+    }
+
+    //Fabric disabling of nbt change animation
+    public boolean allowNbtUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
+        return false;
+    }
+
+    //Forge disabling of nbt change animation
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return false;
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return getEnergyStorage(stack).getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        StatefulEnergyContainer<ItemStack> energyStorage = getEnergyStorage(stack);
+        return (int) (((double) energyStorage.getStoredEnergy() / energyStorage.getMaxCapacity()) * 13);
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        return AdAstra.ETRIUM_COLOR;
     }
 
     public record SlottedItem(ItemStack stack, int slot, SlotFunction runnable) {

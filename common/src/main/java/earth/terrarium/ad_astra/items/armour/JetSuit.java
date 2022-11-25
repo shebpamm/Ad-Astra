@@ -195,7 +195,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return getEnergyStorage(stack).getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick ? 0x63dcc2 : super.getBarColor(stack);
+        return getEnergyStorage(stack).getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick ? AdAstra.ETRIUM_COLOR : super.getBarColor(stack);
     }
 
     @Override

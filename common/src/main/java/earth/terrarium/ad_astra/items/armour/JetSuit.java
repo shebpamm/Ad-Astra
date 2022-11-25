@@ -9,6 +9,7 @@ import earth.terrarium.ad_astra.util.ModUtils;
 import earth.terrarium.botarium.api.energy.EnergyHooks;
 import earth.terrarium.botarium.api.energy.EnergyItem;
 import earth.terrarium.botarium.api.energy.ItemEnergyContainer;
+import earth.terrarium.botarium.api.energy.StatefulEnergyContainer;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
@@ -46,11 +47,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
         if (entity instanceof Player player) {
             ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
             CompoundTag nbt = chest.getOrCreateTag();
-            if (nbt.contains("SpawnParticles")) {
-                if (!nbt.getBoolean("SpawnParticles")) {
-                    return;
-                }
-            } else {
+            if (!nbt.getBoolean("SpawnParticles")) {
                 return;
             }
         }
@@ -95,10 +92,8 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     @Override
     public void appendHoverText(ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag context) {
         super.appendHoverText(stack, level, tooltip, context);
-        if (stack.is(ModItems.JET_SUIT.get())) {
-            long energy = EnergyHooks.getItemEnergyManager(stack).getStoredEnergy();
-            tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
-        }
+        long energy = EnergyHooks.getItemEnergyManager(stack).getStoredEnergy();
+        tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
     }
 
     public void fly(Player player, ItemStack stack) {
@@ -196,5 +191,22 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
             }
         }
         return AdAstra.MOD_ID + ":textures/entity/armour/jet_suit/jet_suit_5.png";
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        return getEnergyStorage(stack).getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick ? 0x63dcc2 : super.getBarColor(stack);
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        StatefulEnergyContainer<ItemStack> energyStorage = getEnergyStorage(stack);
+        if(energyStorage.getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick) return (int) (((double) energyStorage.getStoredEnergy() / energyStorage.getMaxCapacity()) * 13);
+        return super.getBarWidth(stack);
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return stack.isDamaged() || getEnergyStorage(stack).getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
     }
 }

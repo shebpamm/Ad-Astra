@@ -41,6 +41,7 @@ dependencies {
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-forge:$project.rei_version"
     modCompileOnly("mezz.jei:jei-$rootProject.minecraft_version-forge-api:$rootProject.jei_version")
     modLocalRuntime("mezz.jei:jei-$rootProject.minecraft_version-forge:$rootProject.jei_version") { transitive = false }
+
 }
 
 processResources {

@@ -3,7 +3,10 @@ package earth.terrarium.ad_astra.util;
 import com.mojang.serialization.Codec;
 import dev.architectury.injectables.targets.ArchitecturyTarget;
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.AdAstraConfig;
+import earth.terrarium.ad_astra.config.VehiclesConfig;
 import earth.terrarium.ad_astra.data.Planet;
+import earth.terrarium.ad_astra.data.PlanetData;
 import earth.terrarium.ad_astra.entities.vehicles.Lander;
 import earth.terrarium.ad_astra.entities.vehicles.Rocket;
 import earth.terrarium.ad_astra.entities.vehicles.Vehicle;
@@ -71,7 +74,7 @@ public class ModUtils {
             ServerLevel level = oldWorld.getServer().getLevel(targetWorld);
             Set<Entity> entitiesToTeleport = new LinkedHashSet<>();
 
-            Vec3 targetPos = new Vec3(entity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, entity.getZ());
+            Vec3 targetPos = new Vec3(entity.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, entity.getZ());
 
             if (entity instanceof ServerPlayer player) {
                 if (player.getVehicle() instanceof Rocket rocket) {
@@ -113,13 +116,13 @@ public class ModUtils {
 
             // Move the lander to the closest land
             if (first instanceof Lander) {
-                Vec3 nearestLand = LandFinder.findNearestLand(first.getLevel(), new Vec3(first.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, first.getZ()), 70);
+                Vec3 nearestLand = LandFinder.findNearestLand(first.getLevel(), new Vec3(first.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, first.getZ()), 70);
                 first.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), first.getYRot(), first.getXRot());
             }
 
             for (Entity teleportedEntity : teleportedEntities) {
                 if (first instanceof Lander) {
-                    Vec3 nearestLand = LandFinder.findNearestLand(teleportedEntity.getLevel(), new Vec3(teleportedEntity.getX(), AdAstra.CONFIG.rocket.atmosphereLeave, teleportedEntity.getZ()), 70);
+                    Vec3 nearestLand = LandFinder.findNearestLand(teleportedEntity.getLevel(), new Vec3(teleportedEntity.getX(), VehiclesConfig.RocketConfig.atmosphereLeave, teleportedEntity.getZ()), 70);
                     teleportedEntity.moveTo(nearestLand.x(), nearestLand.y(), nearestLand.z(), teleportedEntity.getYRot(), teleportedEntity.getXRot());
                 }
                 teleportedEntity.startRiding(first, true);
@@ -129,7 +132,7 @@ public class ModUtils {
 
     public static void teleportPlayer(ResourceKey<Level> targetWorld, ServerPlayer player) {
         ServerLevel level = player.getServer().getLevel(targetWorld);
-        Vec3 targetPos = new Vec3(player.blockPosition().getX(), AdAstra.CONFIG.rocket.atmosphereLeave, player.blockPosition().getZ());
+        Vec3 targetPos = new Vec3(player.blockPosition().getX(), VehiclesConfig.RocketConfig.atmosphereLeave, player.blockPosition().getZ());
         ChunkPos chunkPos = new ChunkPos(new BlockPos(targetPos.x(), targetPos.y(), targetPos.z()));
         level.getChunkSource().addRegionTicket(TicketType.POST_TELEPORT, chunkPos, 1, player.getId());
         PortalInfo target = new PortalInfo(targetPos, player.getDeltaMovement(), player.getYRot(), player.getXRot());
@@ -194,7 +197,7 @@ public class ModUtils {
      * @return The level's orbit dimension, or the overlevel if no orbit is defined
      */
     public static ResourceKey<Level> getPlanetOrbit(Level level) {
-        return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(level.dimension())).map(Planet::level).findFirst().orElse(Level.OVERWORLD);
+        return PlanetData.getPlanetFromOrbit(level.dimension()).map(Planet::level).orElse(Level.OVERWORLD);
     }
 
     /**
@@ -209,13 +212,13 @@ public class ModUtils {
         }
 
         if (isOrbitlevel(level)) {
-            return AdAstra.CONFIG.general.orbitGravity / VANILLA_GRAVITY;
+            return AdAstraConfig.orbitGravity / VANILLA_GRAVITY;
         }
-        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::gravity).findFirst().orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
+        return PlanetData.getPlanetFromLevel(level.dimension()).map(Planet::gravity).orElse(VANILLA_GRAVITY) / VANILLA_GRAVITY;
     }
 
     public static boolean planetHasAtmosphere(Level level) {
-        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::hasAtmosphere).findFirst().orElse(false);
+        return PlanetData.getPlanetFromLevel(level.dimension()).map(Planet::hasAtmosphere).orElse(false);
     }
 
     /**
@@ -227,7 +230,7 @@ public class ModUtils {
         if (isOrbitlevel(level)) {
             return ORBIT_TEMPERATURE;
         }
-        return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::temperature).findFirst().orElse(20.0f);
+        return PlanetData.getPlanetFromLevel(level.dimension()).map(Planet::temperature).orElse(20.0f);
     }
 
     /**
@@ -244,14 +247,14 @@ public class ModUtils {
         if (Level.OVERWORLD.equals(level.dimension())) {
             return false;
         }
-        return AdAstra.planetWorlds.contains(level.dimension());
+        return PlanetData.isPlanetLevel(level.dimension());
     }
 
     /**
      * Checks if the level is labeled as an orbit dimension.
      */
     public static boolean isOrbitlevel(Level level) {
-        return AdAstra.orbitWorlds.contains(level.dimension());
+        return PlanetData.isOrbitLevel(level.dimension());
     }
 
     /**
@@ -297,9 +300,9 @@ public class ModUtils {
 
     public static long getSolarEnergy(Level level) {
         if (isOrbitlevel(level)) {
-            return AdAstra.planets.stream().filter(p -> p.orbitWorld().equals(level.dimension())).map(Planet::orbitSolarPower).findFirst().orElse(15L);
+            return PlanetData.getPlanetFromOrbit(level.dimension()).map(Planet::orbitSolarPower).orElse(15L);
         } else if (isPlanet(level)) {
-            return AdAstra.planets.stream().filter(p -> p.level().equals(level.dimension())).map(Planet::solarPower).findFirst().orElse(15L);
+            return PlanetData.getPlanetFromLevel(level.dimension()).map(Planet::solarPower).orElse(15L);
         } else {
             return 15L;
         }

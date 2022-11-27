@@ -2,6 +2,7 @@ package earth.terrarium.ad_astra.items.armour;
 
 import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.client.screens.PlayerOverlayScreen;
+import earth.terrarium.ad_astra.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.registry.ModItems;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
 import earth.terrarium.ad_astra.util.ModResourceLocation;
@@ -42,7 +43,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     }
 
     public static void spawnParticles(Level level, LivingEntity entity, HumanoidModel<LivingEntity> model) {
-        if (!AdAstra.CONFIG.spaceSuit.spawnJetSuitParticles) {
+        if (!SpaceSuitConfig.spawnJetSuitParticles) {
             return;
         }
 
@@ -87,7 +88,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     @Override
     public long getTankSize() {
-        return AdAstra.CONFIG.spaceSuit.jetSuitTankSize;
+        return SpaceSuitConfig.jetSuitTankSize;
     }
 
     // Display energy
@@ -95,7 +96,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
     public void appendHoverText(ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag context) {
         super.appendHoverText(stack, level, tooltip, context);
         long energy = EnergyHooks.getItemEnergyManager(stack).getStoredEnergy();
-        tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
+        tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, SpaceSuitConfig.jetSuitMaxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
     }
 
     public void fly(Player player, ItemStack stack) {
@@ -138,13 +139,13 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
             player.fallDistance /= 2;
 
             var energy = EnergyHooks.getItemEnergyManager(stack.getStack());
-            long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+            long tickEnergy = SpaceSuitConfig.jetSuitEnergyPerTick;
             if (!player.isCreative()) {
                 energy.extract(stack, tickEnergy, false);
             }
             isFallFlying = false;
 
-            double speed = AdAstra.CONFIG.spaceSuit.jetSuitUpwardsSpeed;
+            double speed = SpaceSuitConfig.jetSuitUpwardsSpeed;
             player.setDeltaMovement(player.getDeltaMovement().add(0.0, speed, 0.0));
             if (player.getDeltaMovement().y() > speed) {
                 player.setDeltaMovement(player.getDeltaMovement().x(), speed, player.getDeltaMovement().z());
@@ -157,7 +158,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
             if (EnergyHooks.getItemEnergyManager(stack).getStoredEnergy() <= 0) return;
             player.fallDistance /= 2;
             isFallFlying = false;
-            double speed = AdAstra.CONFIG.spaceSuit.jetSuitPropelSpeed;
+            double speed = SpaceSuitConfig.jetSuitSpeed * .2;
             var dir = calculateViewVector(0, player.getYHeadRot());
             dir = dir.yRot(rotation);
             dir = dir.normalize();
@@ -180,13 +181,13 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
             player.fallDistance /= 2;
         }
         var energy = EnergyHooks.getItemEnergyManager(stack.getStack());
-        long tickEnergy = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+        long tickEnergy = SpaceSuitConfig.jetSuitEnergyPerTick;
         if (!player.isCreative()) {
             energy.extract(stack, tickEnergy, false);
         }
         isFallFlying = true;
 
-        double speed = AdAstra.CONFIG.spaceSuit.jetSuitSpeed - (ModUtils.getPlanetGravity(player.level) * 0.25);
+        double speed = SpaceSuitConfig.jetSuitSpeed - (ModUtils.getPlanetGravity(player.level) * 0.25);
         Vec3 rotationVector = player.getLookAngle().scale(speed);
         Vec3 velocity = player.getDeltaMovement();
         player.setDeltaMovement(velocity.add(rotationVector.x() * 0.1 + (rotationVector.x() * 1.5 - velocity.x()) * 0.5, rotationVector.y() * 0.1 + (rotationVector.y() * 1.5 - velocity.y()) * 0.5, rotationVector.z() * 0.1 + (rotationVector.z() * 1.5 - velocity.z()) * 0.5));
@@ -194,7 +195,7 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     @Override
     public ItemEnergyContainer getEnergyStorage(ItemStack itemStack) {
-        return new ItemEnergyContainer(itemStack, AdAstra.CONFIG.spaceSuit.jetSuitMaxEnergy) {
+        return new ItemEnergyContainer(itemStack, SpaceSuitConfig.jetSuitMaxEnergy) {
             @Override
             public long maxInsert() {
                 return 512;
@@ -220,18 +221,18 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return getEnergyStorage(stack).getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick ? AdAstra.ETRIUM_COLOR : super.getBarColor(stack);
+        return getEnergyStorage(stack).getStoredEnergy() > SpaceSuitConfig.jetSuitEnergyPerTick ? AdAstra.ETRIUM_COLOR : super.getBarColor(stack);
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
         StatefulEnergyContainer<ItemStack> energyStorage = getEnergyStorage(stack);
-        if(energyStorage.getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick) return (int) (((double) energyStorage.getStoredEnergy() / energyStorage.getMaxCapacity()) * 13);
+        if(energyStorage.getStoredEnergy() > SpaceSuitConfig.jetSuitEnergyPerTick) return (int) (((double) energyStorage.getStoredEnergy() / energyStorage.getMaxCapacity()) * 13);
         return super.getBarWidth(stack);
     }
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return stack.isDamaged() || getEnergyStorage(stack).getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+        return stack.isDamaged() || getEnergyStorage(stack).getStoredEnergy() > SpaceSuitConfig.jetSuitEnergyPerTick;
     }
 }

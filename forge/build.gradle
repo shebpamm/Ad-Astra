@@ -42,6 +42,7 @@ dependencies {
     modCompileOnly("mezz.jei:jei-$rootProject.minecraft_version-forge-api:$rootProject.jei_version")
     modLocalRuntime("mezz.jei:jei-$rootProject.minecraft_version-forge:$rootProject.jei_version") { transitive = false }
 
+    modImplementation "software.bernie.geckolib:geckolib-forge-1.19:${rootProject.geckolib_forge_version}"
 }
 
 processResources {

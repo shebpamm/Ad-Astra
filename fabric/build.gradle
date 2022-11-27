@@ -44,6 +44,7 @@ dependencies {
     modApi "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"
     common(project(path: ":common", configuration: "namedElements")) { transitive = false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive = false }
+    modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${rootProject.geckolib_fabric_version}"
 
     modApi ("earth.terrarium:botarium-fabric-$rootProject.minecraft_version:$rootProject.botarium_version")
     modApi ("com.teamresourceful.resourcefullib:resourcefullib-fabric-$rootProject.resourcefullib_version")

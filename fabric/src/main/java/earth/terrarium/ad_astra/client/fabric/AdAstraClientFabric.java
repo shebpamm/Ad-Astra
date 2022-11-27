@@ -1,10 +1,13 @@
 package earth.terrarium.ad_astra.client.fabric;
 
+import earth.terrarium.ad_astra.blocks.machines.entity.NasaWorkbenchBlockEntity;
 import earth.terrarium.ad_astra.client.AdAstraClient;
 import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModParticles;
+import earth.terrarium.ad_astra.client.renderer.block.fabric.NasaWorkbenchRenderer;
+import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
@@ -103,5 +106,6 @@ public class AdAstraClientFabric {
                 BlockEntityRendererRegistry.register(type.get(), factory);
             }
         });
+        BlockEntityRendererRegistry.register(ModBlockEntities.NASA_WORKBENCH.get(), context -> new NasaWorkbenchRenderer());
     }
 }

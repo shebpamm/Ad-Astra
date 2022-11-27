@@ -85,6 +85,7 @@ public class AdAstraConfig implements ConfigData {
         public final double jetSuitSpeed = 0.8;
         @ConfigEntry.Gui.Tooltip()
         public final double jetSuitUpwardsSpeed = 0.5;
+        public final double jetSuitPropelSpeed = 0.05;
         public final long jetSuitEnergyPerTick = 60;
         public final long jetSuitTankSize = FluidHooks.buckets(4);
         public final long jetSuitMaxEnergy = 1000000L;

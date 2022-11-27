@@ -221,6 +221,19 @@ public class ModItems {
             }
         }
     });
+    public static final Supplier<Item> ALLOY_SMELTER = register("alloy_smelter", () -> new MachineBlockItem(ModBlocks.ALLOY_SMELTER.get(), new Item.Properties().tab(ITEM_GROUP)) {
+        @Override
+        public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag context) {
+            tooltip.add((Component.translatable("item.ad_astra.generator_energy.tooltip", AdAstra.CONFIG.coalGenerator.energyPerTick).setStyle(Style.EMPTY.withColor(ChatFormatting.BLUE))));
+            if (level != null && level.isClientSide) {
+                if (Screen.hasShiftDown()) {
+                    tooltip.add((Component.translatable("item.ad_astra.coal_generator.tooltip").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN))));
+                } else {
+                    tooltip.add((Component.translatable("tooltip.ad_astra.hold_shift").setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))));
+                }
+            }
+        }
+    });
 
     public static final Supplier<Item> WRENCH = register("wrench", () -> new WrenchItem(new Item.Properties().tab(ITEM_GROUP).stacksTo(1)));
 

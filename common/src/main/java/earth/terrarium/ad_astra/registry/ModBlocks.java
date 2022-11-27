@@ -85,6 +85,7 @@ public class ModBlocks {
     public static final Supplier<Block> ENERGIZER = register("energizer", () -> new EnergizerBlock(MACHINE_PROPERTIES_NON_OPAQUE));
     public static final Supplier<Block> CRYO_FREEZER = register("cryo_freezer", () -> new CryoFreezerBlock(MACHINE_PROPERTIES));
     public static final Supplier<Block> OXYGEN_SENSOR = register("oxygen_sensor", () -> new OxygenSensorBlock(MACHINE_PROPERTIES));
+    public static final Supplier<Block> ALLOY_SMELTER = register("alloy_smelter", () -> new AlloySmelterBlock(MACHINE_PROPERTIES));
 
     public static final Supplier<Block> IRON_SLIDING_DOOR = register("iron_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR)), true);
     public static final Supplier<Block> STEEL_SLIDING_DOOR = register("steel_sliding_door", () -> new SlidingDoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR)), true);

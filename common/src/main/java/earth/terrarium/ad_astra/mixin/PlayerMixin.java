@@ -4,6 +4,7 @@ import earth.terrarium.ad_astra.AdAstra;
 import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.ad_astra.items.armour.NetheriteSpaceSuit;
 import earth.terrarium.ad_astra.util.ModKeyBindings;
+import net.minecraft.core.Direction;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -39,6 +40,15 @@ public abstract class PlayerMixin {
                 if (chest.getItem() instanceof JetSuit jetSuit) {
                     if (ModKeyBindings.jumpKeyDown(player)) {
                         if (JetSuit.hasFullSet(player)) {
+                            if(ModKeyBindings.forwardKeyDown(player)) {
+                                jetSuit.propel(player, chest, 0);
+                            }
+                            if(ModKeyBindings.leftKeyDown(player)) {
+                                jetSuit.propel(player, chest, 90);
+                            }
+                            if(ModKeyBindings.rightKeyDown(player)) {
+                                jetSuit.propel(player, chest, -90);
+                            }
                             jetSuit.fly(player, chest);
                         }
                     } else {

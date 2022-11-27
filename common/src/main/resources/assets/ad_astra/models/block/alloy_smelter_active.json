@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "ad_astra:block/alloy_furnace_bottom",
+    "up": "ad_astra:block/alloy_furnace_top_on",
+    "north": "ad_astra:block/alloy_furnace_front_on",
+    "east": "ad_astra:block/alloy_furnace_side_on",
+    "south": "ad_astra:block/alloy_furnace_back",
+    "west": "ad_astra:block/alloy_furnace_side_on",
+    "particle": "ad_astra:block/alloy_furnace_top_on"
+  }
+}

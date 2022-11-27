@@ -35,6 +35,7 @@ public class ModBlockEntities {
     public static final Supplier<BlockEntityType<SlidingDoorBlockEntity>> SLIDING_DOOR = register("sliding_door", () -> RegistryHelpers.createBlockEntityType(SlidingDoorBlockEntity::new, ModBlocks.IRON_SLIDING_DOOR.get(), ModBlocks.STEEL_SLIDING_DOOR.get(), ModBlocks.DESH_SLIDING_DOOR.get(), ModBlocks.OSTRUM_SLIDING_DOOR.get(), ModBlocks.CALORITE_SLIDING_DOOR.get(), ModBlocks.AIRLOCK.get(), ModBlocks.REINFORCED_DOOR.get()));
     public static final Supplier<BlockEntityType<CableBlockEntity>> CABLE = register("cable", () -> RegistryHelpers.createBlockEntityType(CableBlockEntity::new, ModBlocks.ETRIUM_CABLE.get()));
     public static final Supplier<BlockEntityType<FluidPipeBlockEntity>> FLUID_PIPE = register("fluid_pipe", () -> RegistryHelpers.createBlockEntityType(FluidPipeBlockEntity::new, ModBlocks.DESH_FLUID_PIPE.get(), ModBlocks.OSTRUM_FLUID_PIPE.get()));
+    public static final Supplier<BlockEntityType<AlloySmelterBlockEntity>> ALLOY_SMELTER = register("alloy_smelter", () -> RegistryHelpers.createBlockEntityType(AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER.get()));
 
     private static <T extends BlockEntityType<B>, B extends BlockEntity> Supplier<T> register(String id, Supplier<T> object) {
         return ModRegistryHelpers.register(Registry.BLOCK_ENTITY_TYPE, id, object);

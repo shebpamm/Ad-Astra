@@ -5,7 +5,9 @@ import earth.terrarium.ad_astra.client.registry.ClientModBlockRenderers;
 import earth.terrarium.ad_astra.client.registry.ClientModEntities;
 import earth.terrarium.ad_astra.client.registry.ClientModKeybindings;
 import earth.terrarium.ad_astra.client.registry.ClientModParticles;
+import earth.terrarium.ad_astra.client.renderer.block.forge.NasaWorkbenchRenderer;
 import earth.terrarium.ad_astra.config.forge.ForgeMenuConfig;
+import earth.terrarium.ad_astra.registry.ModBlockEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -119,6 +121,7 @@ public class AdAstraClientForge {
                 event.registerBlockEntityRenderer(type.get(), factory);
             }
         });
+        event.registerBlockEntityRenderer(ModBlockEntities.NASA_WORKBENCH.get(), NasaWorkbenchRenderer::new);
     }
 
     public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

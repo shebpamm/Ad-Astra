@@ -19,13 +19,22 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
+public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity implements IAnimatable {
 
-    private final List<NasaWorkbenchRecipe> acceptedInputs = new ArrayList<>();
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
     public NasaWorkbenchBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.NASA_WORKBENCH.get(), blockPos, blockState);
@@ -55,7 +64,7 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
     public void spawnWorkingParticles() {
         if (this.level instanceof ServerLevel serverWorld) {
             BlockPos pos = this.getBlockPos();
-            ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.CRIT, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, 10, 0.1, 0.1, 0.1, 0.1);
+            ModUtils.spawnForcedParticles(serverWorld, ParticleTypes.CRIT, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, 1, 0.1, 0.1, 0.1, 0.1);
         }
     }
 
@@ -95,5 +104,34 @@ public class NasaWorkbenchBlockEntity extends AbstractMachineBlockEntity {
                 }
             }
         }
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "working", 0, this::work));
+        data.addAnimationController(new AnimationController<>(this, "idle", 0, this::idle));
+    }
+
+    public PlayState work(AnimationEvent<NasaWorkbenchBlockEntity> event) {
+        if (!this.isEmpty()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("activate", ILoopType.EDefaultLoopTypes.PLAY_ONCE).addAnimation("fabricating", ILoopType.EDefaultLoopTypes.LOOP));
+            return PlayState.CONTINUE;
+        }
+        event.getController().markNeedsReload();
+        return PlayState.STOP;
+    }
+
+    public PlayState idle(AnimationEvent<NasaWorkbenchBlockEntity> event) {
+        if (this.isEmpty()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("idle", ILoopType.EDefaultLoopTypes.LOOP));
+            return PlayState.CONTINUE;
+        }
+        event.getController().markNeedsReload();
+        return PlayState.STOP;
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return factory;
     }
 }

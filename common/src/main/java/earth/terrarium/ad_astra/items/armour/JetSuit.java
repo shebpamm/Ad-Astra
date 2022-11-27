@@ -13,10 +13,12 @@ import earth.terrarium.botarium.api.energy.StatefulEnergyContainer;
 import earth.terrarium.botarium.api.item.ItemStackHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -148,6 +150,29 @@ public class JetSuit extends NetheriteSpaceSuit implements EnergyItem {
                 player.setDeltaMovement(player.getDeltaMovement().x(), speed, player.getDeltaMovement().z());
             }
         }
+    }
+
+    public void propel(Player player, ItemStack stack, int rotation) {
+        if (EnergyHooks.isEnergyItem(stack)) {
+            if (EnergyHooks.getItemEnergyManager(stack).getStoredEnergy() <= 0) return;
+            player.fallDistance /= 2;
+            isFallFlying = false;
+            double speed = AdAstra.CONFIG.spaceSuit.jetSuitPropelSpeed;
+            var dir = calculateViewVector(0, player.getYHeadRot());
+            dir = dir.yRot(rotation);
+            dir = dir.normalize();
+            player.push(dir.x * speed, 0, dir.z * speed);
+        }
+    }
+
+    protected final Vec3 calculateViewVector(float xRot, float yRot) {
+        float f = xRot * 0.017453292F;
+        float g = -yRot * 0.017453292F;
+        float h = Mth.cos(g);
+        float i = Mth.sin(g);
+        float j = Mth.cos(f);
+        float k = Mth.sin(f);
+        return new Vec3((double)(i * j), (double)(-k), (double)(h * j));
     }
 
     public void fallFly(Player player, ItemStackHolder stack) {

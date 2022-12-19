@@ -1,6 +1,7 @@
 package earth.terrarium.ad_astra.mixin;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.SpaceSuitConfig;
 import earth.terrarium.ad_astra.items.armour.JetSuit;
 import earth.terrarium.botarium.api.energy.ItemEnergyContainer;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +25,7 @@ public abstract class ItemStackMixin {
         if(this.getItem() instanceof JetSuit jetSuit) {
             ItemStack itemStack = (ItemStack) (Object) this;
             ItemEnergyContainer energyStorage = jetSuit.getEnergyStorage(itemStack);
-            long jetSuitEnergyPerTick = AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+            long jetSuitEnergyPerTick = SpaceSuitConfig.jetSuitEnergyPerTick;
             if(energyStorage.extractEnergy(jetSuitEnergyPerTick, false) == jetSuitEnergyPerTick) {
                 energyStorage.update(itemStack);
                 ci.cancel();

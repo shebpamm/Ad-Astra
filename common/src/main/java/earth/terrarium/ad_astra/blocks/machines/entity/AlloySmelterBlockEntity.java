@@ -1,7 +1,10 @@
 package earth.terrarium.ad_astra.blocks.machines.entity;
 
 import earth.terrarium.ad_astra.AdAstra;
+import earth.terrarium.ad_astra.config.CoalGeneratorConfig;
+import earth.terrarium.ad_astra.recipes.CookingRecipe;
 import earth.terrarium.ad_astra.registry.ModBlockEntities;
+import earth.terrarium.ad_astra.registry.ModRecipeTypes;
 import earth.terrarium.ad_astra.screen.menu.AlloySmelterMenu;
 import earth.terrarium.ad_astra.screen.menu.CoalGeneratorMenu;
 import earth.terrarium.botarium.api.energy.EnergyBlock;
@@ -52,29 +55,36 @@ public class AlloySmelterBlockEntity extends ProcessingMachineBlockEntity implem
     @Override
     public void tick() {
         if (!this.level.isClientSide()) {
-            ItemStack input = this.getItems().get(0);
-            // Consume the fuel
-            if (this.cookTime > 0) {
-                this.cookTime--;
-                this.getEnergyStorage().internalInsert(this.getEnergyPerTick(), false);
-                this.setActive(true);
-                // Check if the input is a valid fuel
-            } else if (!input.isEmpty() && !(input.getItem() instanceof BucketItem)) {
-                int burnTime = Math.min(20000, CommonHooks.getBurnTime(input));
-                if (burnTime > 0) {
-                    input.shrink(1);
-                    this.cookTimeTotal = burnTime;
-                    this.cookTime = burnTime;
+            if (this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), true) > 0) {
+                ItemStack input = this.getItem(0);
+                if (!input.isEmpty() && (input.getItem().equals(this.inputItem) || this.inputItem == null)) {
+                    this.setActive(true);
+                    if (this.cookTime < this.cookTimeTotal) {
+                        this.cookTime++;
+                        this.getEnergyStorage().internalExtract(this.getEnergyPerTick(), false);
+
+                    } else if (this.outputStack != null) {
+                        input.shrink(1);
+                        this.finishCooking();
+
+                    } else {
+                        CookingRecipe recipe = this.createRecipe(ModRecipeTypes.COMPRESSING_RECIPE.get(), input, true);
+                        if (recipe != null) {
+                            this.cookTimeTotal = recipe.getCookTime();
+                            this.cookTime = 0;
+                        }
+                    }
+                } else if (this.outputStack != null) {
+                    this.stopCooking();
+                } else {
+                    this.setActive(false);
                 }
-            } else {
-                this.setActive(false);
             }
-            EnergyHooks.distributeEnergyNearby(this, this.getEnergyPerTick());
         }
     }
 
     public long getEnergyPerTick() {
-        return AdAstra.CONFIG.coalGenerator.energyPerTick;
+        return CoalGeneratorConfig.energyPerTick;
     }
 
     public long getMaxCapacity() {
@@ -83,7 +93,7 @@ public class AlloySmelterBlockEntity extends ProcessingMachineBlockEntity implem
 
     @Override
     public ExtractOnlyEnergyContainer getEnergyStorage() {
-        return energyContainer == null ? energyContainer = new ExtractOnlyEnergyContainer(this, (int) AdAstra.CONFIG.coalGenerator.maxEnergy) : this.energyContainer;
+        return energyContainer == null ? energyContainer = new ExtractOnlyEnergyContainer(this, (int) CoalGeneratorConfig.maxEnergy) : this.energyContainer;
     }
 
     @Override

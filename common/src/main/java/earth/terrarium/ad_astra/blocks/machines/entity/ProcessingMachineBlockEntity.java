@@ -10,6 +10,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockEntity {
 
     protected int cookTime;
@@ -66,6 +68,29 @@ public abstract class ProcessingMachineBlockEntity extends AbstractMachineBlockE
         stopCooking();
 
         CookingRecipe recipe = type.findFirst(this.level, f -> f.test(testStack));
+
+        if (recipe != null) {
+
+            // Stop if something is already in the output.
+            if (checkOutput) {
+                ItemStack outputSlot = this.getItem(1);
+                ItemStack output = recipe.getResultItem();
+                if (!outputSlot.isEmpty() && !outputSlot.getItem().equals(recipe.getResultItem().getItem()) || outputSlot.getCount() + output.getCount() > outputSlot.getMaxStackSize()) {
+                    return null;
+                }
+            }
+
+            this.outputStack = recipe.getResultItem();
+            this.inputItem = testStack.getItem();
+        }
+
+        return recipe;
+    }
+
+    public <T extends CookingRecipe> CookingRecipe createRecipe(ModRecipeType<T> type, List<ItemStack> testStack, boolean checkOutput) {
+        stopCooking();
+
+        CookingRecipe recipe = type.findFirst(this.level, f -> testStack.stream().anyMatch(f::test));
 
         if (recipe != null) {
 

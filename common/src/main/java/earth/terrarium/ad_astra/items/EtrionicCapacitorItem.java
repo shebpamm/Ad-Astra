@@ -35,7 +35,8 @@ public class EtrionicCapacitorItem extends Item implements EnergyItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
         long energy = getEnergyStorage(stack).getStoredEnergy();
-        tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, AdAstra.CONFIG.capacitorConfig.maxEnergy).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
+        // Make use config
+        tooltip.add(Component.translatable("gauge_text.ad_astra.storage", energy, 250000).setStyle(Style.EMPTY.withColor(energy > 0 ? ChatFormatting.GREEN : ChatFormatting.RED)));
     }
 
     @Override
@@ -56,14 +57,15 @@ public class EtrionicCapacitorItem extends Item implements EnergyItem {
 
     @Override
     public StatefulEnergyContainer<ItemStack> getEnergyStorage(ItemStack object) {
-        return new ItemEnergyContainer(object, AdAstra.CONFIG.capacitorConfig.maxEnergy);
+        //TODO Add config
+        return new ItemEnergyContainer(object, 250000);
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         super.inventoryTick(stack, level, entity, slotId, isSelected);
-
-        long transferRate = AdAstra.CONFIG.capacitorConfig.transferRate;
+        //TODO config
+        long transferRate = 500;
         ItemStackHolder from = new ItemStackHolder(stack);
         if(getEnergyStorage(stack).getStoredEnergy() > 0 && isToggled(stack) && entity instanceof Player player) {
             DistributionMode mode = DistributionMode.getMode(stack);
@@ -189,7 +191,8 @@ public class EtrionicCapacitorItem extends Item implements EnergyItem {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return getEnergyStorage(stack).getStoredEnergy() > AdAstra.CONFIG.spaceSuit.jetSuitEnergyPerTick;
+        //TODO config
+        return getEnergyStorage(stack).getStoredEnergy() > 0;
     }
 
     @Override

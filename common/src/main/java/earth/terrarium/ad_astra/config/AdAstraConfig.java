@@ -178,6 +178,9 @@ public final class AdAstraConfig {
     @InlineCategory
     public static CryoFreezerConfig cryoFreezerConfig;
 
+    @InlineCategory
+    public static AlloySmelterConfig alloySmelterConfig;
+
     public static class CryoFreezerConfig {
         public final long maxEnergy = 30000L;
         public final long energyPerTick = 24L;

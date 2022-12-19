@@ -96,7 +96,7 @@ public class AdAstraEmiPlugin implements EmiPlugin {
         EnergyHooks.getItemEnergyManager(jetSuit.getStack()).insert(jetSuit, EnergizerConfig.maxEnergy, false);
 
         ItemStackHolder energizer = new ItemStackHolder(ModItems.ENERGIZER.get().getDefaultInstance());
-        energizer.getStack().getOrCreateTag().putLong("Energy", AdAstra.CONFIG.maxEnergy);
+        energizer.getStack().getOrCreateTag().putLong("Energy", EnergizerConfig.maxEnergy);
 
         registry.addEmiStackAfter(EmiStack.of(tier1Rocket.getStack()), EmiStack.of(ModItems.TIER_1_ROCKET.get()));
         registry.addEmiStackAfter(EmiStack.of(tier2Rocket.getStack()), EmiStack.of(ModItems.TIER_2_ROCKET.get()));

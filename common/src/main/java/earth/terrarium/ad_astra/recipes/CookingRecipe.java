@@ -17,6 +17,12 @@ public abstract class CookingRecipe extends ModRecipe {
         this.cookTime = cookTime;
     }
 
+    public CookingRecipe(ResourceLocation id, List<IngredientHolder> input, ItemStack output, int cookTime) {
+        super(id, input);
+        this.output = output;
+        this.cookTime = cookTime;
+    }
+
     public CookingRecipe(ResourceLocation id, List<IngredientHolder> input, ItemStack output) {
         super(id, input);
         this.output = output;
